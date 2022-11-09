@@ -1,0 +1,5 @@
+springdoc:
+  packages-to-scan: br.com.pagseguro.ibkbillcharge.entrypoint
+  swagger-ui:
+    disable-swagger-default-url: true
+    path: /docs

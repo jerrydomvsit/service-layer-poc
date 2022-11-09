@@ -1,0 +1,46 @@
+spring:
+  mvc.locale: pt_BR
+  main:
+    allow-bean-definition-overriding: true
+
+graceful-shutdown:
+  timeout-ms: 60000
+
+management.endpoints.web.exposure.include: refresh, health
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 30000
+
+server:
+  port: 8801
+
+resilience4j.circuitbreaker:
+  instances:
+    boletoResourceGet:
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 10
+      waitDurationInOpenState: 30s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+      registerHealthIndicator: true
+    boletoResourcePost:
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 10
+      waitDurationInOpenState: 30s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+      registerHealthIndicator: true
+resilience4j.ratelimiter:
+  instances:
+    boletoResourcePost:
+      limitForPeriod: 10
+      limitRefreshPeriod: 1s
+      timeoutDuration: 1s
+    boletoResourceGet:
+      limitForPeriod: 10
+      limitRefreshPeriod: 5s
+      timeoutDuration: 5s

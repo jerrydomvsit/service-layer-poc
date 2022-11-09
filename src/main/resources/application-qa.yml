@@ -1,0 +1,40 @@
+app:
+  integration:
+    boleto-resource:
+      url: https://redirect-link-service.digital-payments.qa.aws.intranet.pagseguro.uol
+    boleto-pdf-resource:
+      url: https://redirect-link-service.digital-payments.qa.aws.intranet.pagseguro.uol
+
+
+logging:
+  level:
+    root: warn
+    br.com.pagseguro: DEBUG
+
+management.metrics.export.newrelic:
+  enabled: false
+  event-type: ibkBillCharge
+  clientProviderType: INSIGHTS_AGENT
+  account-id: 2277381
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 30000
+
+spring:
+  redis:
+    ssl: true
+    host: redis-micellaneous-qa-0001-001.redis-micellaneous-qa.yik48i.use1.cache.amazonaws.com
+    port: 6379
+    password: kms:/keys/redis-qa
+    timeout: 5000ms
+    lettuce:
+      shutdown-timeout: 100ms
+      pool:
+        max-active: 10
+        max-idle: 5
+        max-wait: -1ms
+        min-idle: 1
